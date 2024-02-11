@@ -1,4 +1,4 @@
-package com.arif.arifiot
+package com.arif.arifiot.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
