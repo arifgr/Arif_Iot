@@ -2,6 +2,8 @@ package com.arif.arifiot.data.repository
 
 import com.arif.arifiot.common.Resource
 import com.arif.arifiot.data.remote.dto.DeviceDto
+import com.arif.arifiot.domain.model.Device
+import com.arif.arifiot.domain.model.toDeviceDto
 import com.arif.arifiot.domain.repository.DeviceRepository
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,9 +17,9 @@ import javax.inject.Inject
 class DeviceRepositoryImpl @Inject constructor(
     private val db: DatabaseReference
 ) : DeviceRepository {
-    override fun insertDevice(device: DeviceDto): Flow<Resource<String>> = callbackFlow {
+    override fun insertDevice(device: Device): Flow<Resource<String>> = callbackFlow {
         trySend(Resource.Loading)
-        db.push().setValue(device).addOnCompleteListener {
+        db.push().setValue(device.toDeviceDto()).addOnCompleteListener {
             if (it.isSuccessful)
                 trySend(Resource.Success("Data Inserted Successfully."))
         }.addOnFailureListener {
@@ -29,14 +31,14 @@ class DeviceRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun updateDevice(device: DeviceDto): Flow<Resource<String>> = callbackFlow {
+    override fun updateDevice(device: Device): Flow<Resource<String>> = callbackFlow {
         trySend(Resource.Loading)
         val map = HashMap<String, Any>()
-        map["name"] = device.name!!
-        map["isOpen"] = device.isOpen!!
-        if (device.temperature != null) map["temperature"] = device.temperature
+        map["name"] = device.toDeviceDto().name!!
+        map["isOpen"] = device.toDeviceDto().isOpen!!
+        if (device.temperature != null) map["temperature"] = device.toDeviceDto().temperature!!
 
-        db.child(device.key!!).updateChildren(map).addOnCompleteListener {
+        db.child(device.toDeviceDto().key!!).updateChildren(map).addOnCompleteListener {
             trySend(Resource.Success("Device updated"))
         }.addOnFailureListener {
             trySend(Resource.Error(it))
@@ -46,9 +48,9 @@ class DeviceRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun deleteDevice(device: DeviceDto): Flow<Resource<String>> = callbackFlow {
+    override fun deleteDevice(device: Device): Flow<Resource<String>> = callbackFlow {
         trySend(Resource.Loading)
-        db.child(device.key!!).removeValue()
+        db.child(device.toDeviceDto().key!!).removeValue()
             .addOnCompleteListener {
                 trySend(Resource.Success("Device Deleted"))
             }.addOnFailureListener {
@@ -59,12 +61,12 @@ class DeviceRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getDevices(): Flow<Resource<List<DeviceDto>>> = callbackFlow {
+    override fun getDevices(): Flow<Resource<List<Device>>> = callbackFlow {
         trySend(Resource.Loading)
         val valueEvent = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val devices = snapshot.children.map {
-                    DeviceDto(
+                    Device(
                         it.getValue(DeviceDto::class.java)?.key,
                         it.getValue(DeviceDto::class.java)?.type,
                         it.getValue(DeviceDto::class.java)?.name,
