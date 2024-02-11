@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Arif Iot</string>
+    <string name="deviceIsOn">ON</string>
+    <string name="deviceIsOff">OFF</string>
 </resources>

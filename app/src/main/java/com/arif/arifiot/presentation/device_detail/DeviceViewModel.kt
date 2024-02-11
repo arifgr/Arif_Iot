@@ -22,12 +22,13 @@ class DeviceViewModel @Inject constructor(
 
     private fun updateDevice(device: Device) {
         repositoryImpl.updateDevice(device).onEach {
-            when(it){
+            when (it) {
                 is Resource.Error -> {
                     _state.value = DeviceState(
                         error = it.msg.message ?: "unexpected error"
                     )
                 }
+
                 Resource.Loading -> _state.value = DeviceState(isLoading = true)
                 is Resource.Success -> {
                     _state.value = DeviceState(updatedDevice = device)
@@ -38,12 +39,13 @@ class DeviceViewModel @Inject constructor(
 
     private fun deleteDevice(device: Device) {
         repositoryImpl.deleteDevice(device).onEach {
-            when(it){
+            when (it) {
                 is Resource.Error -> {
                     _state.value = DeviceState(
                         error = it.msg.message ?: "unexpected error"
                     )
                 }
+
                 Resource.Loading -> _state.value = DeviceState(isLoading = true)
                 is Resource.Success -> {
                     _state.value = DeviceState(deletedDevice = device)

@@ -70,8 +70,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
     implementation("com.google.dagger:hilt-android:2.50")
     kapt("com.google.dagger:hilt-android-compiler:2.50")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 }
 
 kapt {
