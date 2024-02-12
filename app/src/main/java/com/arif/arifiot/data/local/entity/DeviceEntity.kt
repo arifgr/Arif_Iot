@@ -1,18 +1,21 @@
-package com.arif.arifiot.data.remote.dto
+package com.arif.arifiot.data.local.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.arif.arifiot.domain.model.Device
 
-data class DeviceDto(
-    val key: String?,
+@Entity
+data class DeviceEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val type: String?,
     val name: String?,
     val isOpen: Boolean?,
     val temperature: Int?
 )
 
-fun DeviceDto.toDevice(): Device {
+fun DeviceEntity.toDevice(): Device {
     return Device(
-        key = key,
+        id = id,
         type = type,
         name = name,
         isOpen = isOpen,

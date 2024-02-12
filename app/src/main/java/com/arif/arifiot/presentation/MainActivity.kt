@@ -11,6 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.arif.arifiot.presentation.device_detail.DeviceScreen
+import com.arif.arifiot.presentation.device_insert.DeviceInsertScreen
 import com.arif.arifiot.presentation.device_list.DeviceListScreen
 import com.arif.arifiot.ui.theme.ArifIotTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             ArifIotTheme {
                 // A surface container using the 'background' color from the theme
@@ -40,6 +42,11 @@ class MainActivity : ComponentActivity() {
                             route = Screen.DeviceScreen.route
                         ) {
                             DeviceScreen()
+                        }
+                        composable(
+                            route = Screen.DeviceInsertScreen.route
+                        ){
+                            DeviceInsertScreen(navController)
                         }
                     }
                 }

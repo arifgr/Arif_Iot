@@ -11,12 +11,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+/*
 
 @HiltViewModel
 class DeviceViewModel @Inject constructor(
     private val repositoryImpl: DeviceRepositoryImpl
 ) : ViewModel() {
-
+*/
+/*
     private val _state = mutableStateOf(DeviceState())
     val state: State<DeviceState> = _state
 
@@ -52,5 +54,6 @@ class DeviceViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
-    }
-}
+    }*//*
+
+}*/

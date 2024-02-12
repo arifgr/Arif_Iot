@@ -1,10 +1,7 @@
 package com.arif.arifiot.presentation.device_list
 
-import com.arif.arifiot.domain.model.Device
+import com.arif.arifiot.data.local.entity.DeviceEntity
 
 data class DeviceListState(
-    val isLoading: Boolean = false,
-    val devices: List<Device> = emptyList(),
-    val error: String = "",
-    val insertedDevice: Device? = null
+    val devices: List<DeviceEntity> = emptyList()
 )

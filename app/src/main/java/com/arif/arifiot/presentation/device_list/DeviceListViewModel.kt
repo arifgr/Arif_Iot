@@ -4,54 +4,33 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.arif.arifiot.common.Resource
-import com.arif.arifiot.data.repository.DeviceRepositoryImpl
-import com.arif.arifiot.domain.model.Device
+import com.arif.arifiot.domain.use_case.DeviceUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
 class DeviceListViewModel @Inject constructor(
-    private val repositoryImpl: DeviceRepositoryImpl
+    private val useCases: DeviceUseCases
 ) : ViewModel() {
-
     private val _state = mutableStateOf(DeviceListState())
     val state: State<DeviceListState> = _state
+
+    private var getDevicesJob: Job? = null
 
     init {
         getDevices()
     }
-    private fun getDevices() {
-        repositoryImpl.getDevices().onEach {
-            when(it){
-                is Resource.Error -> {
-                    _state.value = DeviceListState(
-                        error = it.msg.message ?: "unexpected error"
-                    )
-                }
-                Resource.Loading -> _state.value = DeviceListState(isLoading = true)
-                is Resource.Success -> {
-                    _state.value = DeviceListState(devices = it.data)
-                }
-            }
-        }.launchIn(viewModelScope)
-    }
 
-    private fun insertDevice(device: Device) {
-        repositoryImpl.insertDevice(device).onEach {
-            when(it){
-                is Resource.Error -> {
-                    _state.value = DeviceListState(
-                        error = it.msg.message ?: "unexpected error"
-                    )
-                }
-                Resource.Loading -> _state.value = DeviceListState(isLoading = true)
-                is Resource.Success -> {
-                    _state.value = DeviceListState(insertedDevice = device)
-                }
-            }
-        }.launchIn(viewModelScope)
+    private fun getDevices() {
+        getDevicesJob?.cancel()
+        getDevicesJob = useCases.getDevices()
+            .onEach { devices ->
+                _state.value = state.value.copy(
+                    devices = devices
+                )
+            }.launchIn(viewModelScope)
     }
 }
