@@ -8,4 +8,5 @@ interface DeviceRepository {
     suspend fun upsertDevice(device: DeviceEntity)
     suspend fun deleteDevice(device: DeviceEntity)
     fun getDevices(): Flow<List<DeviceEntity>>
+    suspend fun getDeviceById(id: Int): DeviceEntity
 }

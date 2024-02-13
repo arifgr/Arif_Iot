@@ -24,17 +24,24 @@ fun DeviceListScreen(
 ) {
     val state = viewModel.state.value
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
-        LazyColumn(modifier = Modifier.fillMaxWidth().weight(1f)) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
             items(state.devices) { device ->
                 DeviceListItem(
                     device = device,
                     onItemClick = {
-                        navController.navigate(Screen.DeviceScreen.route)
+                        navController.navigate(
+                            Screen.DeviceScreen.route +
+                                    "?deviceId=${device.id}"
+                        )
                     })
             }
         }
 
-        Button(onClick = { navController.navigate(Screen.DeviceInsertScreen.route)}) {
+        Button(onClick = { navController.navigate(Screen.DeviceInsertScreen.route) }) {
             Text(stringResource(R.string.add_new_device))
         }
     }

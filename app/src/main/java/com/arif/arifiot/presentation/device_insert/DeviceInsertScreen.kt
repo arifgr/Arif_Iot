@@ -5,23 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.arif.arifiot.data.local.entity.DeviceEntity
-import com.arif.arifiot.domain.model.Device
 import com.arif.arifiot.presentation.device_insert.components.DeviceInsertItem
 import kotlinx.coroutines.flow.collectLatest
 
@@ -52,9 +42,7 @@ fun DeviceInsertScreen(
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
-                DeviceUpsertViewModel.UiEvent.UpsertNote -> {
-                    navController.navigateUp()
-                }
+                is DeviceUpsertEvent.UpsertedDevice -> navController.navigateUp()
             }
         }
     }

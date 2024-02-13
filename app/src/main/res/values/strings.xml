@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Arif Iot</string>
-    <string name="deviceIsOn">ON</string>
-    <string name="deviceIsOff">OFF</string>
+    <string name="device_is_on">ON</string>
+    <string name="device_is_off">OFF</string>
     <string name="add_new_device">Add New Device</string>
     <string name="celsius">%s ℃</string>
     <string name="name">NAME: %s</string>

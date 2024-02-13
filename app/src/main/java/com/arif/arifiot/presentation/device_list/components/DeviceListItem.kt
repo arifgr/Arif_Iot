@@ -51,8 +51,8 @@ fun DeviceListItem(
         )
         {
             Text(
-                text = if (device.isOpen!!) stringResource(R.string.deviceIsOn) else stringResource(
-                    R.string.deviceIsOff
+                text = if (device.isOpen!!) stringResource(R.string.device_is_on) else stringResource(
+                    R.string.device_is_off
                 ), style = MaterialTheme.typography.bodyMedium
             )
             if (device.temperature != null) {

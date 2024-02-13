@@ -8,9 +8,9 @@ import com.arif.arifiot.domain.model.Device
 data class DeviceEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val type: String?,
-    val name: String?,
-    val isOpen: Boolean?,
-    val temperature: Int?
+    var name: String?,
+    var isOpen: Boolean?,
+    var temperature: Int?
 )
 
 fun DeviceEntity.toDevice(): Device {

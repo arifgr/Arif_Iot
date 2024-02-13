@@ -2,7 +2,6 @@ package com.arif.arifiot.presentation.device_insert
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arif.arifiot.data.local.entity.DeviceEntity
@@ -22,12 +21,8 @@ class DeviceUpsertViewModel @Inject constructor(
     private val _state = mutableStateOf(DeviceUpsertState())
     val state: State<DeviceUpsertState> = _state
 
-    private val _eventFlow = MutableSharedFlow<UiEvent>()
+    private val _eventFlow = MutableSharedFlow<DeviceUpsertEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
-
-    sealed class UiEvent {
-        object UpsertNote : UiEvent()
-    }
 
     fun onEvent(event: DeviceUpsertEvent) {
         when (event) {
@@ -41,7 +36,7 @@ class DeviceUpsertViewModel @Inject constructor(
                             temperature = event.device.temperature
                         )
                     )
-                    _eventFlow.emit(UiEvent.UpsertNote)
+                    _eventFlow.emit(DeviceUpsertEvent.UpsertedDevice(event.device))
                 }
             }
         }

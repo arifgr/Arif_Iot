@@ -7,6 +7,7 @@ import com.arif.arifiot.data.repository.DeviceRepository
 import com.arif.arifiot.data.repository.DeviceRepositoryImpl
 import com.arif.arifiot.domain.use_case.DeviceUseCases
 import com.arif.arifiot.domain.use_case.delete_device.DeleteDevice
+import com.arif.arifiot.domain.use_case.get_device_by_id.GetDeviceById
 import com.arif.arifiot.domain.use_case.get_devices.GetDevices
 import com.arif.arifiot.domain.use_case.upsert_device.UpsertDevice
 import dagger.Module
@@ -22,7 +23,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDeviceDatabase(app: Application): DeviceDatabase {
-        return  Room.databaseBuilder(
+        return Room.databaseBuilder(
             app,
             DeviceDatabase::class.java,
             DeviceDatabase.DATABASE_NAME
@@ -41,7 +42,8 @@ object AppModule {
         return DeviceUseCases(
             getDevices = GetDevices(repository),
             deleteDevice = DeleteDevice(repository),
-            upsertDevice = UpsertDevice(repository)
+            upsertDevice = UpsertDevice(repository),
+            getDeviceById = GetDeviceById(repository)
         )
     }
 }
