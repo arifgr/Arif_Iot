@@ -8,7 +8,7 @@ import com.arif.arifiot.data.local.entity.DeviceEntity
     entities = [DeviceEntity::class],
     version = 1
 )
-abstract class DeviceDatabase: RoomDatabase() {
+abstract class DeviceDatabase : RoomDatabase() {
     abstract val dao: DeviceDao
 
     companion object {

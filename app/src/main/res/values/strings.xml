@@ -3,6 +3,13 @@
     <string name="device_is_on">ON</string>
     <string name="device_is_off">OFF</string>
     <string name="add_new_device">Add New Device</string>
+    <string name="delete_device">Delete Device</string>
+    <string name="device_deleted">Device deleted</string>
+    <string name="done">DONE</string>
     <string name="celsius">%s ℃</string>
+    <string name="temperature_header">TEMPERATURE(℃):</string>
     <string name="name">NAME: %s</string>
+    <string name="name_header">NAME:</string>
+    <string name="device_type">DEVICE TYPE: %s</string>
+    <string name="you_have_no_device">You have no device. You can add a new one.</string>
 </resources>

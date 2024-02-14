@@ -64,8 +64,8 @@ class DeviceViewModel @Inject constructor(
     fun onEvent(event: DeviceEvent) {
         when (event) {
             is DeviceEvent.DeviceDeleted -> viewModelScope.launch {
-                useCases.deleteDevice(event.device)
-                _eventFlow.emit(DeviceEvent.DevicePropertyChanged(event.device))
+                useCases.deleteDevice(currentDevice!!)
+                _eventFlow.emit(DeviceEvent.DeviceDeleted)
             }
 
             is DeviceEvent.DevicePropertyChanged -> viewModelScope.launch {
@@ -93,6 +93,9 @@ class DeviceViewModel @Inject constructor(
                 currentDevice!!.temperature = event.deviceTemperature
                 updateDevice(currentDevice!!)
             }
+
+            is DeviceEvent.DeviceType -> _deviceType.value =
+                deviceType.value.copy(deviceType = event.deviceType)
         }
     }
 

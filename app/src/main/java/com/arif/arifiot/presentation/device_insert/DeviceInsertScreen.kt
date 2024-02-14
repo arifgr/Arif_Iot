@@ -20,25 +20,6 @@ fun DeviceInsertScreen(
     navController: NavController,
     viewModel: DeviceUpsertViewModel = hiltViewModel()
 ) {
-    val device1 = DeviceEntity(
-        type = "Arif Smart Light Bulb",
-        name = "bulb",
-        isOpen = false,
-        temperature = null
-    )
-    val device2 = DeviceEntity(
-        type = "Arif Smart Door Lock",
-        name = "lock",
-        isOpen = false,
-        temperature = null
-    )
-    val device3 = DeviceEntity(
-        type = "Arif Smart Heater",
-        name = "heater",
-        isOpen = false,
-        temperature = 30
-    )
-
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
@@ -51,25 +32,46 @@ fun DeviceInsertScreen(
         Column {
 
             DeviceInsertItem(
-                device = device1,
+                device = BrandNewDevices.smartLightBulb,
                 onItemClick = {
-                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(device1))
+                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(BrandNewDevices.smartLightBulb))
                 }
             )
             Spacer(modifier = Modifier.height(10.dp))
             DeviceInsertItem(
-                device = device2,
+                device = BrandNewDevices.smartDoorLock,
                 onItemClick = {
-                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(device2))
+                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(BrandNewDevices.smartDoorLock))
                 }
             )
             Spacer(modifier = Modifier.height(10.dp))
             DeviceInsertItem(
-                device = device3,
+                device = BrandNewDevices.smartHeater,
                 onItemClick = {
-                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(device3))
+                    viewModel.onEvent(DeviceUpsertEvent.UpsertedDevice(BrandNewDevices.smartHeater))
                 }
             )
         }
     }
+}
+
+object BrandNewDevices {
+    val smartLightBulb = DeviceEntity(
+        type = "Arif Smart Light Bulb",
+        name = "bulb",
+        isOpen = false,
+        temperature = null
+    )
+    val smartDoorLock = DeviceEntity(
+        type = "Arif Smart Door Lock",
+        name = "lock",
+        isOpen = false,
+        temperature = null
+    )
+    val smartHeater = DeviceEntity(
+        type = "Arif Smart Heater",
+        name = "heater",
+        isOpen = false,
+        temperature = 30
+    )
 }

@@ -1,7 +1,5 @@
 package com.arif.arifiot.presentation.device_insert
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arif.arifiot.data.local.entity.DeviceEntity
@@ -17,9 +15,6 @@ import javax.inject.Inject
 class DeviceUpsertViewModel @Inject constructor(
     private val useCases: DeviceUseCases
 ) : ViewModel() {
-
-    private val _state = mutableStateOf(DeviceUpsertState())
-    val state: State<DeviceUpsertState> = _state
 
     private val _eventFlow = MutableSharedFlow<DeviceUpsertEvent>()
     val eventFlow = _eventFlow.asSharedFlow()

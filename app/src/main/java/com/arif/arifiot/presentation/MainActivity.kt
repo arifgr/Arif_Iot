@@ -12,7 +12,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.arif.arifiot.data.local.entity.DeviceEntity
 import com.arif.arifiot.presentation.device_detail.DeviceScreen
 import com.arif.arifiot.presentation.device_insert.DeviceInsertScreen
 import com.arif.arifiot.presentation.device_list.DeviceListScreen

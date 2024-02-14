@@ -2,7 +2,7 @@ package com.arif.arifiot.presentation.device_detail.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,7 +22,7 @@ fun TextField(
     Box(
         modifier = modifier
     ) {
-        BasicTextField(
+        OutlinedTextField(
             value = text,
             onValueChange = onValueChange,
             modifier = Modifier
