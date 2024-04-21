@@ -6,7 +6,7 @@ import com.arif.arifiot.data.repository.DeviceRepository
 class GetDeviceById(
     private val repository: DeviceRepository
 ) {
-    suspend operator fun invoke(id: Int): DeviceEntity {
+    suspend operator fun invoke(id: Int): DeviceEntity? {
         return repository.getDeviceById(id)
     }
 }

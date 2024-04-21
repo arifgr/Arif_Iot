@@ -45,16 +45,16 @@ class DeviceViewModel @Inject constructor(
             if (deviceId != -1) {
                 viewModelScope.launch {
                     useCases.getDeviceById(deviceId).also { device ->
-                        currentDeviceId = device.id
+                        currentDeviceId = device?.id
                         currentDevice = device
                         _deviceName.value =
-                            deviceName.value.copy(updatedDeviceName = device.name)
+                            deviceName.value.copy(updatedDeviceName = device?.name)
                         _deviceType.value =
-                            deviceType.value.copy(deviceType = device.type)
+                            deviceType.value.copy(deviceType = device?.type)
                         _deviceSwitch.value =
-                            deviceSwitch.value.copy(updatedDeviceSwitch = device.isOpen)
+                            deviceSwitch.value.copy(updatedDeviceSwitch = device?.isOpen)
                         _deviceTemperature.value =
-                            deviceTemperature.value.copy(updatedDeviceTemperature = device.temperature)
+                            deviceTemperature.value.copy(updatedDeviceTemperature = device?.temperature)
                     }
                 }
             }

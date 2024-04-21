@@ -1,25 +1,25 @@
 package com.arif.arifiot.data.repository
 
-import com.arif.arifiot.data.local.DeviceDao
 import com.arif.arifiot.data.local.entity.DeviceEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class DeviceRepositoryImpl(
-    private val dao: DeviceDao
-) : DeviceRepository {
+class FakeDeviceRepository : DeviceRepository {
+
+    private val devices = mutableListOf<DeviceEntity>()
     override suspend fun upsertDevice(device: DeviceEntity) {
-        dao.upsertDevice(device)
+        devices.add(device)
     }
 
     override suspend fun deleteDevice(device: DeviceEntity) {
-        dao.deleteDevice(device)
+        devices.remove(device)
     }
 
     override fun getDevices(): Flow<List<DeviceEntity>> {
-        return dao.getDevices()
+        return flow { emit(devices) }
     }
 
     override suspend fun getDeviceById(id: Int): DeviceEntity? {
-        return dao.getDeviceById(id)
+        return devices.find { it.id == id }
     }
 }
